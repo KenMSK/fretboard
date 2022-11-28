@@ -1,6 +1,8 @@
-# Getting Started with Create React App
+<img width="1614" alt="Screenshot 2022-11-28 at 22 53 36" src="https://user-images.githubusercontent.com/51538854/204310103-afbdf960-6a78-4a94-8afb-9ad5a6da4fac.png"><img width="1256" alt="Screenshot 2022-11-28 at 22 51 25" src="https://user-images.githubusercontent.com/51538854/204310536-9258b82d-06a4-4c2a-a162-35f50b8a0fb2.png">
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Display selected notes on a generated fretboard.
+123 system and ABC system supported
+Transparency is availble.
 
 ## Available Scripts
 
