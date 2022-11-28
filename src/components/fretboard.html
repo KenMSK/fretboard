@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+
+<head>
+  <style>
+    .fretboard {
+      display: flex;
+    }
+
+    .string {
+      border-left: 1px solid black;
+      border-right: 1px solid black;
+      height: 40px;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-bottom: 1px solid black;
+    }
+
+    .string>* {
+      transform: translateY(20px);
+    }
+
+    .fret {
+      width: calc(100% / 24);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .string:first-child {
+      border: none;
+      border-bottom: 1px solid black;
+    }
+
+    .note {
+      height: 30px;
+      width: 30px;
+      border-radius: 15px;
+      background-color: orange;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .space {
+      height: 60px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.5em;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="fretboard">
+    <div class="fret">
+      <div class="string">
+        <div class="note">3</div>
+      </div>
+      <div class="string">
+      </div>
+      <div class="string">
+        <div class="note">5</div>
+      </div>
+      <div class="string">
+      </div>
+      <div class="string">
+      </div>
+      <div class="string">
+        <div class="note">3</div>
+      </div>
+      <div class="space"></div>
+    </div>
+    <div class="fret">
+      <div class="string">
+      </div>
+      <div class="string">
+        <div class="note">1</div>
+      </div>
+      <div class="string">
+      </div>
+      <div class="string">
+      </div>
+      <div class="string">
+      </div>
+      <div class="string">
+      </div>
+      <div class="space">C</div>
+    </div>
+    <div class="fret">
+      <div class="string">
+      </div>
+      <div class="string">
+      </div>
+      <div class="string">
+      </div>
+      <div class="string">
+        <div class="note">3</div>
+      </div>
+      <div class="string">
+      </div>
+      <div class="string">
+      </div>
+      <div class="space">B</div>
+    </div>
+    <div class="fret">
+      <div class="string">
+        <div class="note">5</div>
+      </div>
+      <div class="string">
+      </div>
+      <div class="string">
+      </div>
+      <div class="string">
+      </div>
+      <div class="string">
+        <div class="note">1</div>
+      </div>
+      <div class="string">
+        <div class="note">5</div>
+      </div>
+      <div class="space"></div>
+    </div>
+    <div class="fret">
+      <div class="string">
+      </div>
+      <div class="string">
+      </div>
+      <div class="string">
+      </div>
+      <div class="string">
+      </div>
+      <div class="string">
+      </div>
+      <div class="string">
+      </div>
+      <div class="space">A</div>
+    </div>
+    <div class="fret">
+      <div class="string">
+      </div>
+      <div class="string">
+        <div class="note">3</div>
+      </div>
+      <div class="string">
+        <div class="note">1</div>
+      </div>
+      <div class="string">
+        <div class="note">5</div>
+      </div>
+      <div class="string">
+      </div>
+      <div class="string">
+      </div>
+      <div class="space"></div>
+    </div>
+    <div class="fret">
+      <div class="string">
+      </div>
+      <div class="string">
+      </div>
+      <div class="string">
+      </div>
+      <div class="string">
+      </div>
+      <div class="string">
+      </div>
+      <div class="string">
+      </div>
+      <div class="space">G</div>
+    </div>
+    <div class="fret">
+      <div class="string">
+      </div>
+      <div class="string">
+      </div>
+      <div class="string">
+      </div>
+      <div class="string">
+      </div>
+      <div class="string">
+        <div class="note">3</div>
+      </div>
+      <div class="string">
+      </div>
+    </div>
+    <div class="fret">
+      <div class="string">
+        <div class="note">1</div>
+      </div>
+      <div class="string">
+        <div class="note">5</div>
+      </div>
+      <div class="string">
+      </div>
+      <div class="string">
+      </div>
+      <div class="string">
+      </div>
+      <div class="string">
+        <div class="note">1</div>
+      </div>
+      <div class="space">F</div>
+    </div>
+    <div class="fret">
+      <div class="string">
+      </div>
+      <div class="string">
+      </div>
+      <div class="string">
+        <div class="note">3</div>
+      </div>
+      <div class="string">
+      </div>
+      <div class="string">
+      </div>
+      <div class="string">
+      </div>
+      <div class="space">E</div>
+    </div>
+    <div class="fret">
+      <div class="string">
+      </div>
+      <div class="string">
+      </div>
+      <div class="string">
+      </div>
+      <div class="string">
+        <div class="note">1</div>
+      </div>
+      <div class="string">
+        <div class="note">5</div>
+      </div>
+      <div class="string">
+      </div>
+      <div class="space"></div>
+    </div>
+    <div class="fret">
+      <div class="string">
+      </div>
+      <div class="string">
+      </div>
+      <div class="string">
+      </div>
+      <div class="string">
+      </div>
+      <div class="string">
+      </div>
+      <div class="string">
+      </div>
+      <div class="space">D</div>
+    </div>
+    <div class="fret">
+      <div class="string">
+        <div class="note">3</div>
+      </div>
+      <div class="string">
+      </div>
+      <div class="string">
+        <div class="note">5</div>
+      </div>
+      <div class="string">
+      </div>
+      <div class="string">
+      </div>
+      <div class="string">
+        <div class="note">3</div>
+      </div>
+    </div>
+    <div class="fret">
+      <div class="string">
+      </div>
+      <div class="string">
+        <div class="note">1</div>
+      </div>
+      <div class="string">
+      </div>
+      <div class="string">
+      </div>
+      <div class="string">
+      </div>
+      <div class="string">
+      </div>
+      <div class="space">C</div>
+    </div>
+    <div class="fret">
+      <div class="string">
+      </div>
+      <div class="string">
+      </div>
+      <div class="string">
+      </div>
+      <div class="string">
+        <div class="note">3</div>
+      </div>
+      <div class="string">
+      </div>
+      <div class="string">
+      </div>
+      <div class="space">B</div>
+    </div>
+    <div class="fret">
+      <div class="string">
+        <div class="note">5</div>
+      </div>
+      <div class="string">
+      </div>
+      <div class="string">
+      </div>
+      <div class="string">
+      </div>
+      <div class="string">
+        <div class="note">1</div>
+      </div>
+      <div class="string">
+        <div class="note">5</div>
+      </div>
+      <div class="space"></div>
+    </div>
+    <div class="fret">
+      <div class="string">
+      </div>
+      <div class="string">
+      </div>
+      <div class="string">
+      </div>
+      <div class="string">
+      </div>
+      <div class="string">
+      </div>
+      <div class="string">
+      </div>
+      <div class="space">A</div>
+    </div>
+    <div class="fret">
+      <div class="string">
+      </div>
+      <div class="string">
+        <div class="note">3</div>
+      </div>
+      <div class="string">
+        <div class="note">1</div>
+      </div>
+      <div class="string">
+        <div class="note">5</div>
+      </div>
+      <div class="string">
+      </div>
+      <div class="string">
+      </div>
+      <div class="space"></div>
+    </div>
+    <div class="fret">
+      <div class="string">
+      </div>
+      <div class="string">
+      </div>
+      <div class="string">
+      </div>
+      <div class="string">
+      </div>
+      <div class="string">
+      </div>
+      <div class="string">
+      </div>
+      <div class="space">G</div>
+    </div>
+    <div class="fret">
+      <div class="string">
+      </div>
+      <div class="string">
+      </div>
+      <div class="string">
+      </div>
+      <div class="string">
+      </div>
+      <div class="string">
+        <div class="note">3</div>
+      </div>
+      <div class="string">
+      </div>
+    </div>
+    <div class="fret">
+      <div class="string">
+        <div class="note">1</div>
+      </div>
+      <div class="string">
+        <div class="note">5</div>
+      </div>
+      <div class="string">
+      </div>
+      <div class="string">
+      </div>
+      <div class="string">
+      </div>
+      <div class="string">
+        <div class="note">1</div>
+      </div>
+      <div class="space">F</div>
+    </div>
+  </div>
+</body>
