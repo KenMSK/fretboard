@@ -105,15 +105,17 @@ export const Fretboard: React.FunctionComponent<FretboardPropType> = ({
           .slice(0, 6)
           .map((note) => nameTheNote(note, false, false))
         const remark = fretNotation[6]
-        const fretRemark = nameTheNote((15 - remark) % 13, true)
+        const fretRemark = nameTheNote(((13 - remark) % 12) + 1, true) // nameTheNote((15 - remark) % 13, true)
         return (
           <Fret>
             {fretNames.map((name) => {
-              const isDisplay = ["1", "3", "5"].includes(name)
+              const isDisplay = ["1"].includes(name)
               return (
                 <String>
                   {isDisplay && (
-                    <Note isTransparent={["a"].includes(name)}>{name}</Note>
+                    <Note isTransparent={!["1", "3", "5"].includes(name)}>
+                      {name}
+                    </Note>
                   )}
                 </String>
               )
