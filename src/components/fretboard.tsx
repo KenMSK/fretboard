@@ -14,6 +14,12 @@ type FretNotation =
     ]
 type BoardNotation = FretNotation[]
 
+type RGB = `rgb(${number},${number},${number})`
+type RGBA = `rgba(${number},${number},${number},${number})`
+type HEX = `#${string}`
+
+type Color = RGB | RGBA | HEX
+
 const Board = styled.div`
   display: flex;
   margin: 8px;
@@ -37,7 +43,7 @@ const String = styled.div`
   }
 `
 
-const Fret = styled.div<{ bgColor?: string }>`
+const Fret = styled.div<{ bgColor?: Color }>`
   width: calc(100% / 24);
   display: flex;
   flex-direction: column;
@@ -65,28 +71,37 @@ const Space = styled.div`
   font-size: 1.5em;
 `
 
+/**
+ * return 1-12. cyclically shifted + 1. ie: 1=>2, 2=>3, 12=>1
+ * */
 function noteProgression(note: NoteNumber): NoteNumber {
   return (note % 12) + 1
 }
 
+/**
+ * Convert 1-12 numbering to diatonic scale. 1-7, or A-G
+ * */
 function nameTheNote(
   note: NoteNumber,
   { isAlphabet = false, isSharp = true, base = "C" }
 ): string {
   const numberBaseNotes = [1, 1.5, 2, 2.5, 3, 4, 4.5, 5, 5.5, 6, 6.5, 7]
   const numberNote = numberBaseNotes[note - 1]
-  const baseNote = Math.floor(numberNote + (isSharp ? 0 : 0.5))
-  const toneChange = numberNote === baseNote ? "" : isSharp ? "#" : "b"
+  const noteBase = Math.floor(numberNote + (isSharp ? 0 : 0.5))
+  const noteShift = numberNote === noteBase ? "" : isSharp ? "#" : "b"
 
   const alphabetNotes = ["C", "D", "E", "F", "G", "A", "B"]
   const baseIndex = alphabetNotes.indexOf(base)
   const englishName = alphabetNotes
     .slice(baseIndex, 7)
     .concat(alphabetNotes.slice(0, baseIndex))
-  const noteName = isAlphabet ? englishName[baseNote - 1] : baseNote
-  return noteName + toneChange
+  const noteName = isAlphabet ? englishName[noteBase - 1] : noteBase
+  return noteName + noteShift
 }
 
+/**
+ * Compute the next fret
+ * */
 function fretProgression(fret: FretNotation): FretNotation {
   const strings: FretNotation = fret.map(noteProgression) as FretNotation
   return strings
@@ -97,11 +112,11 @@ export const Fretboard: React.FunctionComponent<FretboardPropType> = ({
   children,
 }) => {
   const board: BoardNotation = []
-  let singleFret = [5, 12, 8, 3, 10, 5, 0] as FretNotation
+  let fret = [5, 12, 8, 3, 10, 5, 0] as FretNotation
 
   for (let i = 0; i < 16; i++) {
-    board.push(singleFret)
-    singleFret = fretProgression(singleFret)
+    board.push(fret)
+    fret = fretProgression(fret)
   }
 
   return (
@@ -114,16 +129,8 @@ export const Fretboard: React.FunctionComponent<FretboardPropType> = ({
         const fretRemark = nameTheNote(((13 - remark) % 12) + 1, {
           isAlphabet: true,
         })
-        const fretColor = undefined
-        //  [3, 5, 7, 9].includes(i)
-        //   ? "#eeeeee"
-        //   : [12].includes(i)
-        //   ? "#cceecc"
-        //   : [0].includes(i)
-        //   ? "grey"
-        //   : undefined
         return (
-          <Fret bgColor={fretColor}>
+          <Fret bgColor={undefined}>
             {i}
             {fretNames.map((name) => {
               const isDisplay = ["1", "2", "3", "5", "6"].includes(name)
