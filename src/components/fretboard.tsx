@@ -2,7 +2,6 @@ import * as React from "react"
 import styled from "styled-components"
 
 type NoteNumber = number
-type Remark = string
 type FretNotation =
   | [
       NoteNumber,
@@ -18,11 +17,6 @@ type BoardNotation = FretNotation[]
 const Board = styled.div`
   display: flex;
   margin: 8px;
-`
-const Fret = styled.div`
-  width: calc(100% / 24);
-  display: flex;
-  flex-direction: column;
 `
 
 const String = styled.div`
@@ -40,6 +34,15 @@ const String = styled.div`
   }
   & > * {
     transform: translateY(20px);
+  }
+`
+
+const Fret = styled.div<{ bgColor?: string }>`
+  width: calc(100% / 24);
+  display: flex;
+  flex-direction: column;
+  & ${String}:not(:first-child) {
+    background-color: ${(props) => props.bgColor};
   }
 `
 
@@ -68,8 +71,7 @@ function noteProgression(note: NoteNumber): NoteNumber {
 
 function nameTheNote(
   note: NoteNumber,
-  isAlphabet = false,
-  isSharp = true
+  { isAlphabet = false, isSharp = true, base = "C" }
 ): string {
   const numberBaseNotes = [1, 1.5, 2, 2.5, 3, 4, 4.5, 5, 5.5, 6, 6.5, 7]
   const numberNote = numberBaseNotes[note - 1]
@@ -77,7 +79,11 @@ function nameTheNote(
   const toneChange = numberNote === baseNote ? "" : isSharp ? "#" : "b"
 
   const alphabetNotes = ["C", "D", "E", "F", "G", "A", "B"]
-  const noteName = isAlphabet ? alphabetNotes[baseNote - 1] : baseNote
+  const baseIndex = alphabetNotes.indexOf(base)
+  const englishName = alphabetNotes
+    .slice(baseIndex, 7)
+    .concat(alphabetNotes.slice(0, baseIndex))
+  const noteName = isAlphabet ? englishName[baseNote - 1] : baseNote
   return noteName + toneChange
 }
 
@@ -93,23 +99,34 @@ export const Fretboard: React.FunctionComponent<FretboardPropType> = ({
   const board: BoardNotation = []
   let singleFret = [5, 12, 8, 3, 10, 5, 0] as FretNotation
 
-  for (let i = 0; i < 23; i++) {
+  for (let i = 0; i < 16; i++) {
     board.push(singleFret)
     singleFret = fretProgression(singleFret)
   }
 
   return (
     <Board>
-      {board.map((fretNotation) => {
+      {board.map((fretNotation, i) => {
         const fretNames = fretNotation
           .slice(0, 6)
-          .map((note) => nameTheNote(note, false, false))
+          .map((note) => nameTheNote(note, {}))
         const remark = fretNotation[6]
-        const fretRemark = nameTheNote(((13 - remark) % 12) + 1, true) // nameTheNote((15 - remark) % 13, true)
+        const fretRemark = nameTheNote(((13 - remark) % 12) + 1, {
+          isAlphabet: true,
+        })
+        const fretColor = undefined
+        //  [3, 5, 7, 9].includes(i)
+        //   ? "#eeeeee"
+        //   : [12].includes(i)
+        //   ? "#cceecc"
+        //   : [0].includes(i)
+        //   ? "grey"
+        //   : undefined
         return (
-          <Fret>
+          <Fret bgColor={fretColor}>
+            {i}
             {fretNames.map((name) => {
-              const isDisplay = ["1"].includes(name)
+              const isDisplay = ["1", "2", "3", "5", "6"].includes(name)
               return (
                 <String>
                   {isDisplay && (
